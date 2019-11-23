@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float gravityModifier;
     public float jumpForce;
-    public float timeSpeed = 1;
+    public float timeSpeed = 1f;
 
     public bool mechanicJump;
     public bool mechanicRotation;
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
             // Jumping when there is a hole in front
             if (canJump && keyPressed && !isJumping)
             {
-                t = 0;
+                t = 0f;
                 isJumping = true;
                 rb.velocity = new Vector3 (
                     currentRotation.x * jumpForce,
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Raycast that checks if there is a hole in front of the Player
         canJump = !Physics.Raycast(
-            rb.position + (transform.forward * 4),
+            rb.position + (transform.forward * 4f),
             Vector3.down,
             out hit,
             13.5f);
@@ -94,13 +94,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = new Vector3(currentRotation.x, 0.0f, currentRotation.y);
 
         // Velocity before new velocity is created
-        Vector3 past = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        Vector3 past = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         if (mechanicMovement)
         {
             if (isJumping && t >= 0.5f)
             {
-                rb.velocity = new Vector3(0, rb.velocity.y, 0) + past;
+                rb.velocity = new Vector3(0f, rb.velocity.y, 0f) + past;
             }
             else if (!isJumping && (t <= 0.55f || Math.Abs(t) < Mathf.Epsilon))
             {
@@ -117,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 Quaternion.LookRotation(movement),
-                0.15F);
+                0.15f);
         }
     }
 
