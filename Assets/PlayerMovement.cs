@@ -31,8 +31,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.DrawRay(new Vector3(myRigidbody.position.x, myRigidbody.position.y, myRigidbody.position.z) + transform.forward, Vector3.down * 45f, Color.green);
-        canJump = Physics.Raycast(new Vector3(myRigidbody.position.x, myRigidbody.position.y, myRigidbody.position.z + 26), Vector3.down, out hit , 45f);
+        Debug.DrawRay(new Vector3(myRigidbody.position.x, myRigidbody.position.y, myRigidbody.position.z) + (transform.forward * 4), Vector3.down * 45f, Color.green);
+        canJump = Physics.Raycast(new Vector3(myRigidbody.position.x, myRigidbody.position.y, myRigidbody.position.z) + (transform.forward * 4), Vector3.down, out hit , 45f);
         
 
         myRigidbody.velocity += Physics.gravity * gravityModifier * Time.deltaTime;
