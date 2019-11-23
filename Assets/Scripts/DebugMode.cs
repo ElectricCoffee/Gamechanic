@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class DebugMode : MonoBehaviour
 {
     [SerializeField] Button[] mechanicsOptions;
     [SerializeField] Text[] xMark;
+    [SerializeField] Text[] selectableMechanics;
+    [SerializeField] Text[] capacityText;
     [SerializeField] Sprite imageSprite;
+
+    int optionIndex = 0;
 
     int[] counters;
 
@@ -21,7 +24,12 @@ public class DebugMode : MonoBehaviour
             button.GetComponent<Button>();
         }
     }
-    
+
+    private void Update()
+    {
+        ChangeTextColor();
+    }
+
     public void MovementOptionPress()
     {
         ChangeImage(0);
@@ -67,6 +75,42 @@ public class DebugMode : MonoBehaviour
         else
         {
             xMark[imageIndex].text = "";
+        }
+    }
+
+    private void ChangeTextColor()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow)){
+            optionIndex -= 1;
+            if (optionIndex - 1 < 0)
+            {
+                optionIndex = 0;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            optionIndex += 1;
+            if (optionIndex + 1 >= mechanicsOptions.Length)
+            {
+                optionIndex = mechanicsOptions.Length - 1;
+            }
+        }
+
+        xMark[optionIndex].color = Color.blue;
+        selectableMechanics[optionIndex].color = Color.blue;
+        capacityText[optionIndex].color = Color.blue;
+
+        if (optionIndex > 0)
+        {
+            selectableMechanics[optionIndex - 1].color = Color.white;
+            xMark[optionIndex - 1].color = Color.white;
+            capacityText[optionIndex - 1].color = Color.white;
+        }
+        if(optionIndex < mechanicsOptions.Length - 1)
+        {
+            xMark[optionIndex + 1].color = Color.white;
+            selectableMechanics[optionIndex + 1].color = Color.white;
+            capacityText[optionIndex + 1].color = Color.white;
         }
     }
 }
