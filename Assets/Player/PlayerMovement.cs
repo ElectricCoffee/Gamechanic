@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -43,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Attack());
         }
-            
 
         Time.timeScale = timeSpeed; // Set time speed
 
@@ -53,9 +53,7 @@ public class PlayerMovement : MonoBehaviour
             Kill();
         }
 
-
-
-        if ((Math.Abs(Input.GetAxisRaw("Horizontal")) > 0.0001) || Math.Abs(Input.GetAxisRaw("Vertical")) > 0.0001)
+        if ((Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.0001) || Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.0001)
         {
             StartCoroutine(Walk());
         }
@@ -67,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
         rb.velocity += Physics.gravity * gravityModifier * Time.fixedDeltaTime;
 
         moveInput = new Vector3(
@@ -173,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
         isDead = true;
         yield return new WaitForSeconds(despawnDelay);
         Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     IEnumerator StopWalk()

@@ -5,19 +5,10 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform lookAt;
-    public float boundX = 100f;
-    public float boundZ = 100f;
+    public float boundX = 1f;
+    public float boundZ = 1f;
 
     private Vector3 desiredPossition;
-
-    // Use this for initialization
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-    }
 
     // LateUpdate is called after Update each frame
     void LateUpdate()
