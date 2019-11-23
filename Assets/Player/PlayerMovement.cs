@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public float gravityModifier;
     public float jumpForce;
     public float timeSpeed = 1f;
-    public float despawnDelay = 3;
+    public float despawnDelay = 3f;
+    public float timeToAttack = 1f;
 
     public bool mechanicJump;
     public bool mechanicRotation;
@@ -38,6 +39,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(Attack());
+        }
+            
+
         Time.timeScale = timeSpeed; // Set time speed
 
         // Kill player if health is 0 or mechanic is off
@@ -154,6 +161,15 @@ public class PlayerMovement : MonoBehaviour
         isDead = true;
         yield return new WaitForSeconds(despawnDelay);
         Destroy(gameObject);
+    }
+
+    IEnumerator Attack()
+    {
+        Debug.Log("1");
+        gameObject.GetComponentInChildren<Animator>().SetBool("Attacking", true);
+        gameObject.GetComponentInChildren<Animator>().Play("Attack");
+        yield return new WaitForSeconds(timeToAttack);
+        gameObject.GetComponentInChildren<Animator>().SetBool("Attacking", false);
     }
 
     private void HandleMovement(bool active)
