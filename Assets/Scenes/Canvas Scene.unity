@@ -132,6 +132,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &80379131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 80379131, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 7744804463365603957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &121916220 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7744804463310801225, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
@@ -274,6 +286,18 @@ Transform:
 --- !u!114 &434380710 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7744804463475401220, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 7744804463365603957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &479681902 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 479681902, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
     type: 3}
   m_PrefabInstance: {fileID: 7744804463365603957}
   m_PrefabAsset: {fileID: 0}
@@ -635,6 +659,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &841674984 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 841674984, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 7744804463365603957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &866590392 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7744804463107595469, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
@@ -717,6 +753,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1183961130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1183961130, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 7744804463365603957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1258186259 stripped
@@ -1016,6 +1064,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 590554856546242579, guid: 1c7ee8461a0bfb24285260aceb70712c,
         type: 3}
+      propertyPath: mechanicsOptions.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 590554856546242579, guid: 1c7ee8461a0bfb24285260aceb70712c,
+        type: 3}
+      propertyPath: xMark.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 590554856546242579, guid: 1c7ee8461a0bfb24285260aceb70712c,
+        type: 3}
+      propertyPath: selectableMechanics.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 590554856546242579, guid: 1c7ee8461a0bfb24285260aceb70712c,
+        type: 3}
+      propertyPath: capacityText.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 590554856546242579, guid: 1c7ee8461a0bfb24285260aceb70712c,
+        type: 3}
       propertyPath: mechanicsOptions.Array.data[0]
       value: 
       objectReference: {fileID: 8358685203772222521}
@@ -1179,6 +1247,26 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1317287014}
+    - target: {fileID: 590554856546242579, guid: 1c7ee8461a0bfb24285260aceb70712c,
+        type: 3}
+      propertyPath: mechanicsOptions.Array.data[8]
+      value: 
+      objectReference: {fileID: 841674984}
+    - target: {fileID: 590554856546242579, guid: 1c7ee8461a0bfb24285260aceb70712c,
+        type: 3}
+      propertyPath: xMark.Array.data[8]
+      value: 
+      objectReference: {fileID: 80379131}
+    - target: {fileID: 590554856546242579, guid: 1c7ee8461a0bfb24285260aceb70712c,
+        type: 3}
+      propertyPath: selectableMechanics.Array.data[8]
+      value: 
+      objectReference: {fileID: 1183961130}
+    - target: {fileID: 590554856546242579, guid: 1c7ee8461a0bfb24285260aceb70712c,
+        type: 3}
+      propertyPath: capacityText.Array.data[8]
+      value: 
+      objectReference: {fileID: 479681902}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c7ee8461a0bfb24285260aceb70712c, type: 3}
 --- !u!1001 &7744804463365603957
@@ -1338,46 +1426,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 826377173}
-    - target: {fileID: 2268425838349837613, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Movement Text
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744804463217345153, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Jumping Text
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744804463475401242, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Rotation Text
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744804464499985596, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Text
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744804463212712718, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Combat Text
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744804463691510783, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Dialogue Text
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744804463957946385, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Additional Text
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744804463311338870, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Additional (1) Text
-      objectReference: {fileID: 0}
+    - target: {fileID: 841674984, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 826377173}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba, type: 3}
 --- !u!114 &8358685203772222521 stripped

@@ -113,6 +113,24 @@ public class DebugMode : MonoBehaviour
         counters[5]++;
     }
 
+    public void UnlockablesOptionPress()
+    {
+        ChangeXMark(6);
+        counters[6]++;
+    }
+
+    public void TimeflowOptionPress()
+    {
+        ChangeXMark(7);
+        counters[7]++;
+    }
+
+    public void InteractablesOptionPress()
+    {
+        ChangeXMark(8);
+        counters[8]++;
+    }
+
     public void ChangeXMark(int index)
     {
         if (counters[index] % 2 == 0)
