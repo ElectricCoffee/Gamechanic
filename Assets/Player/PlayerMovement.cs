@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public bool mechanicHealth;
 
     private Rigidbody rb;
-    public bool isJumping;
+    private bool isJumping;
     private bool isDead;
 
     private Vector3 moveInput;
@@ -52,10 +52,23 @@ public class PlayerMovement : MonoBehaviour
         {
             Kill();
         }
+
+
+
+        if ((Math.Abs(Input.GetAxisRaw("Horizontal")) > 0.0001) || Math.Abs(Input.GetAxisRaw("Vertical")) > 0.0001)
+        {
+            gameObject.GetComponentInChildren<Animator>().SetBool("Walking", true);
+            print(gameObject.GetComponentInChildren<Animator>().GetBool("Walking"));
+        }
+        else
+        {
+            gameObject.GetComponentInChildren<Animator>().SetBool("Walking", false);
+        }
     }
 
     void FixedUpdate()
     {
+
         rb.velocity += Physics.gravity * gravityModifier * Time.fixedDeltaTime;
 
         moveInput = new Vector3(
@@ -165,7 +178,6 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Attack()
     {
-        Debug.Log("1");
         gameObject.GetComponentInChildren<Animator>().SetBool("Attacking", true);
         gameObject.GetComponentInChildren<Animator>().Play("Attack");
         yield return new WaitForSeconds(timeToAttack);

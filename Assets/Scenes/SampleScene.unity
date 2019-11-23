@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -456,7 +456,7 @@ Transform:
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &501466564
 PrefabInstance:
@@ -588,31 +588,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41d1cac196452694fb10f2476db79e6e, type: 3}
---- !u!1 &677334679 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2964016549503288627, guid: 906d23a675456ed40a41a5e8658aa230,
-    type: 3}
-  m_PrefabInstance: {fileID: 2205089436291946186}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &677334683
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 677334679}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 418119383cc14c746ae8842b08232704, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &683512824
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,22 +786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b536e216bbd27d458fd574b3bcccea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 10
-  speed: 10
-  MakeSourceStationary: 0
-  positionOffset: 5
-  light: {fileID: 0}
-  intensityOrigin: 0
-  intensityOffset: 0
-  intensityDelta: 0
-  rangeOrigin: 0
-  rangeOffset: 0
-  rangeTarget: 0
-  rangeDelta: 0
-  positionOrigin: {x: 0, y: 0, z: 0}
-  positionDelta: {x: 0, y: 0, z: 0}
-  setNewTargets: 0
-  deltaSum: 0
 --- !u!1001 &1271113937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1027,6 +986,31 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1452398340 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7907160129982869627, guid: 906d23a675456ed40a41a5e8658aa230,
+    type: 3}
+  m_PrefabInstance: {fileID: 2205089436291946186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1452398342
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452398340}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 418119383cc14c746ae8842b08232704, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1615185612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,7 +1618,7 @@ PrefabInstance:
     - target: {fileID: 2205089436537242029, guid: 906d23a675456ed40a41a5e8658aa230,
         type: 3}
       propertyPath: mechanicRotation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2946709881767681386, guid: 906d23a675456ed40a41a5e8658aa230,
         type: 3}
