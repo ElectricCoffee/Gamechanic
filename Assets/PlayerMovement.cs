@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping;
     private bool isDead;
 
-    private Vector2 moveInput;
-    private Vector2 currentRotation;
+    private Vector3 moveInput;
+    private Vector3 currentRotation;
     private uint health = 1;
     private float time; // what the hell is 't'?
 
@@ -42,110 +42,61 @@ public class PlayerMovement : MonoBehaviour
         {
             Kill();
         }
-
-        if (mechanicJump)
-        {
-            var keyPressed = Input.GetKeyDown(KeyCode.Space);
-            // Jumping when there is a hole in front
-            if (keyPressed && !isJumping)
-            {
-                time = 0f;
-                isJumping = true;
-                rb.velocity = new Vector3 (
-                    currentRotation.x * jumpForce,
-                    jumpForce / 2,
-                    currentRotation.y * jumpForce);
-            }
-        }
-
-        isJumping &= (time < 0.5f);
-
-        // Timer for jumping only for 0.5 seconds
-        if (isJumping)
-        {
-            if (time < 0.5f)
-            {
-                time += Time.deltaTime;
-            }
-        }
     }
 
     void FixedUpdate()
     {
         rb.velocity += Physics.gravity * gravityModifier * Time.fixedDeltaTime;
 
-        moveInput = new Vector2(
+        moveInput = new Vector3(
             Input.GetAxisRaw("Horizontal"),
+            0f,
             Input.GetAxisRaw("Vertical"));
 
         // Method for setting facing direction
         Rotate(moveInput);
 
-        // Vector showing where is the Player facing
-        Vector3 movement = new Vector3(currentRotation.x, 0.0f, currentRotation.y);
+        HandleMovement(mechanicMovement);
 
-        // Velocity before new velocity is created
-        Vector3 past = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        HandleRotation(mechanicRotation);
 
-        if (mechanicMovement)
-        {
-            if (isJumping && time >= 0.5f)
-            {
-                rb.velocity = new Vector3(0f, rb.velocity.y, 0f) + past;
-            }
-            else if (!isJumping && (time <= 0.55f || Math.Abs(time) < Mathf.Epsilon))
-            {
-                rb.velocity = new Vector3(
-                    moveInput.x * speed,
-                    rb.velocity.y,
-                    moveInput.y * speed);
-            }
-        }
-
-        if (mechanicRotation)
-        {
-            // Rotating the Player
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                Quaternion.LookRotation(movement),
-                0.15f);
-        }
+        HandleJumping(mechanicJump);
     }
 
-    private void Rotate(Vector2 vector)
+    private void Rotate(Vector3 vector)
     {
         
-        if (vector == Vector2.one)
+        if (vector == new Vector3(1, 0f, 1))
         {
-            currentRotation = Vector2.one;
+            currentRotation = new Vector3(1, 0f, 1);
         }
-        else if (vector == Vector2.right)
+        else if (vector == Vector3.right)
         {
-            currentRotation = Vector2.right;
+            currentRotation = Vector3.right;
         }
-        else if (vector == new Vector2(1f, -1f))
+        else if (vector == new Vector3(1f, 0f, -1f))
         {
-            currentRotation = new Vector2(1f, -1f);
+            currentRotation = new Vector3(1f, 0f, -1f);
         }
-        else if (vector == Vector2.up)
+        else if (vector == Vector3.forward)
         {
-            currentRotation = Vector2.up;
+            currentRotation = Vector3.forward;
         }
-        else if (vector == Vector2.down)
+        else if (vector == Vector3.back)
         {
-            currentRotation = Vector2.down;
+            currentRotation = Vector3.back;
         }
-        else if (vector == new Vector2(-1f, 1f))
+        else if (vector == new Vector3(-1f, 0f, 1f))
         {
-            currentRotation = new Vector2(-1f, 1f);
+            currentRotation = new Vector3(-1f, 0, 1f);
         }
-        else if (vector == Vector2.left)
+        else if (vector == Vector3.left)
         {
-            currentRotation = Vector2.left;
+            currentRotation = Vector3.left;
         }
-        else if (vector == new Vector2(-1f, -1f))
+        else if (vector == new Vector3(-1f, 0f, -1f))
         {
-            currentRotation = new Vector2(-1f, -1f);
+            currentRotation = new Vector3(-1f, 0f, -1f);
         }
     }
 
@@ -159,5 +110,70 @@ public class PlayerMovement : MonoBehaviour
         isDead = true;
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
+    }
+
+    private void HandleMovement(bool active)
+    {
+        if (active)
+        {
+            // Velocity before new velocity is created
+            Vector3 past = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            // Jumping uses a different velocity from moving on the ground
+            if (isJumping && time >= 0.5f)
+            {
+                rb.velocity = new Vector3(0f, rb.velocity.y, 0f) + past;
+            }
+            else if (!isJumping && (time <= 0.55f || Math.Abs(time) < Mathf.Epsilon))
+            {
+                rb.velocity = new Vector3(
+                    moveInput.x * speed,
+                    rb.velocity.y,
+                    moveInput.z * speed);
+            }
+        }
+    }
+
+    private void HandleRotation(bool active)
+    {
+        if (active)
+        {
+            // Vector showing where is the Player facing
+            Vector3 orientation = new Vector3(currentRotation.x, 0.0f, currentRotation.z);
+
+            // Rotating the Player
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(orientation),
+                0.15f);
+        }
+    }
+
+    private void HandleJumping(bool active)
+    {
+        if (active)
+        {
+            var keyPressed = Input.GetKeyDown(KeyCode.Space);
+            // Jumping when there is a hole in front
+            if (keyPressed && !isJumping)
+            {
+                time = 0f;
+                isJumping = true;
+                rb.velocity = new Vector3(
+                    currentRotation.x * jumpForce,
+                    jumpForce / 2,
+                    currentRotation.z * jumpForce);
+            }
+        }
+
+        isJumping &= (time < 0.5f);
+
+        // Timer for jumping only for 0.5 seconds
+        if (isJumping)
+        {
+            if (time < 0.5f)
+            {
+                time += Time.deltaTime;
+            }
+        }
     }
 }
