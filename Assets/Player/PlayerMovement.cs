@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float timeSpeed = 1f;
     public float despawnDelay = 3f;
-    public float timeToAttack = 0.5f;
+    public float timeToAttack = 1f;
 
     public bool mechanicJump;
     public bool mechanicRotation;
@@ -57,12 +57,11 @@ public class PlayerMovement : MonoBehaviour
 
         if ((Math.Abs(Input.GetAxisRaw("Horizontal")) > 0.0001) || Math.Abs(Input.GetAxisRaw("Vertical")) > 0.0001)
         {
-            gameObject.GetComponentInChildren<Animator>().SetBool("Walking", true);
-            print(gameObject.GetComponentInChildren<Animator>().GetBool("Walking"));
+            StartCoroutine(Walk());
         }
         else
         {
-            gameObject.GetComponentInChildren<Animator>().SetBool("Walking", false);
+            StartCoroutine(StopWalk());
         }
     }
 
@@ -174,6 +173,17 @@ public class PlayerMovement : MonoBehaviour
         isDead = true;
         yield return new WaitForSeconds(despawnDelay);
         Destroy(gameObject);
+    }
+
+    IEnumerator StopWalk()
+    {
+        gameObject.GetComponentInChildren<Animator>().SetBool("Walking", false);
+        yield return new WaitForSeconds(0);
+    }
+    IEnumerator Walk()
+    {
+        gameObject.GetComponentInChildren<Animator>().SetBool("Walking", true);
+        yield return new WaitForSeconds(0);
     }
 
     IEnumerator Attack()

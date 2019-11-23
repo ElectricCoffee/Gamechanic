@@ -32,17 +32,19 @@ public class EnemyMovementAI : MonoBehaviour
 
     private bool waiting = false;
 
+    private BoxCollider boxCollider;
+
     void Start()
     {
         visibleObjects = new List<GameObject>();
         rb = gameObject.GetComponent<Rigidbody>();
+        boxCollider = gameObject.GetComponent<BoxCollider>();
 
         currentTarget = transform.position;
     }
 
     void FixedUpdate()
     {
-        Debug.Log("Current Target: " + currentTarget);
         foreach (var target in targets)
         {
             if (visibleObjects.Contains(target))
@@ -107,7 +109,6 @@ public class EnemyMovementAI : MonoBehaviour
         bool isWaiting = false;
         if (EqualWithoutY(currentTarget) || TimeElapsed(elapsedTime))
         {
-            Debug.Log("Equal without Y");
             var randDistance = Random.Range(walkingSpeed, walkingSpeed * 3);
             currentTarget = new Vector3(
                 x: Random.Range(-1f, 1f) * randDistance,
@@ -165,6 +166,8 @@ public class EnemyMovementAI : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         visibleObjects.Add(other.gameObject);
+
+        
     }
 
     /// <summary>
@@ -178,6 +181,14 @@ public class EnemyMovementAI : MonoBehaviour
     public void Kill()
     {
         StartCoroutine(Die());
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Weapon")
+        {
+            Kill();
+        }
     }
 
     IEnumerator Die()
