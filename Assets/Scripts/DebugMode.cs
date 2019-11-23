@@ -24,19 +24,25 @@ public class DebugMode : MonoBehaviour
             player.mechanicMovement,
             player.mechanicJump,
             player.mechanicRotation,
-            player.mechanicHealth
+            player.mechanicHealth,
+            player.mechanicCombat,
+            player.mechanicDialogue,
+            player.mechanicUnlockables,
+            player.mechanicTimeflow,
+            player.mechanicInteractables
         };
 
         foreach(Button button in mechanicsOptions)
         {
             button.GetComponent<Button>();
         }
+
+        CheckForActiveMechanic();
     }
 
     private void Update()
     {
         ChangeTextColor();
-        CheckForActiveMechanic();
     }
 
     public void MovementOptionPress()
@@ -80,7 +86,6 @@ public class DebugMode : MonoBehaviour
         {
             player.mechanicRotation = true;
         }
-
         ChangeXMark(2);
         counters[2]++;
     }
@@ -94,7 +99,6 @@ public class DebugMode : MonoBehaviour
         }
         else
         {
-
             player.mechanicHealth = true;
         }
         ChangeXMark(3);
@@ -103,30 +107,75 @@ public class DebugMode : MonoBehaviour
 
     public void CombatOptionPress()
     {
+        if (player.mechanicCombat)
+        {
+            player.mechanicCombat = false;
+            isActive[4] = false;
+        }
+        else
+        {
+            player.mechanicCombat = true;
+        }
         ChangeXMark(4);
         counters[4]++;
     }
 
     public void DialogueOptionPress()
     {
+        if (player.mechanicDialogue)
+        {
+            player.mechanicDialogue = false;
+            isActive[5] = false;
+        }
+        else
+        {
+            player.mechanicDialogue = true;
+        }
         ChangeXMark(5);
         counters[5]++;
     }
 
     public void UnlockablesOptionPress()
     {
+        if (player.mechanicUnlockables)
+        {
+            player.mechanicUnlockables = false;
+            isActive[6] = false;
+        }
+        else
+        {
+            player.mechanicUnlockables = true;
+        }
         ChangeXMark(6);
         counters[6]++;
     }
 
     public void TimeflowOptionPress()
     {
+        if (player.mechanicTimeflow)
+        {
+            player.mechanicTimeflow = false;
+            isActive[7] = false;
+        }
+        else
+        {
+            player.mechanicTimeflow = true;
+        }
         ChangeXMark(7);
         counters[7]++;
     }
 
     public void InteractablesOptionPress()
     {
+        if (player.mechanicInteractables)
+        {
+            player.mechanicInteractables = false;
+            isActive[8] = false;
+        }
+        else
+        {
+            player.mechanicInteractables = true;
+        }
         ChangeXMark(8);
         counters[8]++;
     }
@@ -186,7 +235,7 @@ public class DebugMode : MonoBehaviour
             if (isActive[i])
             {
                 xMark[i].text = "X";
-                counters[i] += 1;
+                counters[i]++;
             }
         }
     }
