@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private const float JUMPING_TIME = 0.5f;
+    private const float JUMPING_TIME = 1.4f;
     private const float JUMP_HEIGHT = 13.5f;
     private const float SLERP_TIME = 0.15f;
 
@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveInput;
     private Vector3 currentRotation;
     private uint health = 1;
+    private uint keys;
     private float time;
 
     // Start is called before the first frame update
@@ -63,6 +64,47 @@ public class PlayerMovement : MonoBehaviour
         HandleRotation(mechanicRotation);
 
         HandleJumping(mechanicJump);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Key")
+        {
+            other.gameObject.SetActive(false);
+            keys++;
+        }
+        if(other.gameObject.tag == "Door")
+        {
+            other.gameObject.GetComponent<Animator>().SetTrigger("DoorATrigger");
+        }
+        if(other.gameObject.tag == "LockedDoor" && keys > 0)
+        {
+                other.gameObject.GetComponent<Animator>().SetTrigger("DoorATrigger");
+                other.gameObject.tag = "Door";
+                keys -= 1;
+        }
+        if (other.gameObject.tag == "Chest")
+        {
+            other.gameObject.GetComponent<Animator>().SetTrigger("OpenChest");
+        }
+        if (other.gameObject.tag == "LockedChest" && keys > 0)
+        {
+                other.gameObject.GetComponent<Animator>().SetTrigger("OpenChest");
+                other.gameObject.tag = "Chest";
+                keys--;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Chest")
+        {
+            other.gameObject.GetComponent<Animator>().SetTrigger("CloseChest");
+        }
+        if (other.gameObject.tag == "Door")
+        {
+            other.gameObject.GetComponent<Animator>().SetTrigger("DoorClose");
+        }
     }
 
     private void Rotate(Vector3 vector)
@@ -125,7 +167,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector3(0f, rb.velocity.y, 0f) + past;
             }
-            else if (!isJumping && (time <= 0.55f || Math.Abs(time) < Mathf.Epsilon))
+            else if (!isJumping && (time <= JUMPING_TIME + 0.05f || Math.Abs(time) < Mathf.Epsilon))
             {
                 rb.velocity = new Vector3(
                     moveInput.x * speed,
@@ -162,9 +204,9 @@ public class PlayerMovement : MonoBehaviour
                 time = 0f;
                 isJumping = true;
                 rb.velocity = new Vector3(
-                    currentRotation.x * jumpForce,
-                    jumpForce / 2,
-                    currentRotation.z * jumpForce);
+                    currentRotation.x * jumpForce / 1.5f,
+                    jumpForce / 1.2f,
+                    currentRotation.z * jumpForce / 1.5f);
             }
         }
 
