@@ -8,24 +8,15 @@ public class CameraController : MonoBehaviour
     public float boundX = 100f;
     public float boundZ = 100f;
 
-    public Collider collider;
-
-    private float maxX;
-    private float maxZ;
-
     private Vector3 desiredPossition;
 
     // Use this for initialization
     void Start()
     {
-        maxX = collider.transform.position.x;
-        maxZ = collider.transform.position.z;
     }
 
     void Update()
     {
-        transform.position.x = Mathf.Clamp(transform.position.x, maxX, -maxX);
-        transform.position.z = Mathf.Clamp(transform.position.z, maxZ, -maxZ);
     }
 
     // LateUpdate is called after Update each frame
