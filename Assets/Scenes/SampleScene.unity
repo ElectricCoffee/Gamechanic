@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150063897}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 100, z: 6.18}
+  m_LocalPosition: {x: 0, y: 118, z: 6.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 383850343}
   m_Layer: 0
   m_Name: PlayerParent
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -282,8 +282,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10.657741, y: 22.55452, z: 6.2600975}
-  m_Center: {x: 0.0633266, y: -1.7268991, z: -0.12585998}
+  m_Size: {x: 10.153925, y: 22.55452, z: 6.2600975}
+  m_Center: {x: 0.015996695, y: -1.7268991, z: -0.12585998}
 --- !u!54 &383850346
 Rigidbody:
   m_ObjectHideFlags: 0
