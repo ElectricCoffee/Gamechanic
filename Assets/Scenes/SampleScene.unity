@@ -250,7 +250,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   gravityModifier: 5
+  jumpForce: 50
+  t: 0
   canJump: 0
+  isJumping: 0
 --- !u!4 &383850344
 Transform:
   m_ObjectHideFlags: 0
@@ -395,7 +398,6 @@ GameObject:
   m_Component:
   - component: {fileID: 683512827}
   - component: {fileID: 683512826}
-  - component: {fileID: 683512825}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -403,14 +405,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &683512825
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683512824}
-  m_Enabled: 1
 --- !u!20 &683512826
 Camera:
   m_ObjectHideFlags: 0
