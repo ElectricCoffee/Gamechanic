@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -170,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
         isDead = true;
         yield return new WaitForSeconds(despawnDelay);
         Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     IEnumerator Attack()
