@@ -10,14 +10,22 @@ public class DebugMode : MonoBehaviour
     [SerializeField] Text[] selectableMechanics;
     [SerializeField] Text[] capacityText;
     [SerializeField] Sprite imageSprite;
+    [SerializeField] PlayerMovement player;
 
     int optionIndex = 0;
-
     int[] counters;
+    List<bool> isActive;
 
     void Start()
     {
+        player.GetComponent<PlayerMovement>();
         counters = new int[mechanicsOptions.Length];
+        isActive = new List<bool>{
+            player.mechanicMovement,
+            player.mechanicJump,
+            player.mechanicRotation,
+            player.mechanicHealth
+        };
 
         foreach(Button button in mechanicsOptions)
         {
@@ -28,53 +36,92 @@ public class DebugMode : MonoBehaviour
     private void Update()
     {
         ChangeTextColor();
+        CheckForActiveMechanic();
     }
 
     public void MovementOptionPress()
     {
-        ChangeImage(0);
+        if (player.mechanicMovement)
+        {
+            player.mechanicMovement = false;
+            isActive[0] = false;
+        }
+        else
+        {
+            player.mechanicMovement = true;
+        }
+        ChangeXMark(0);
         counters[0]++;
     }
 
     public void JumpingOptionPress()
     {
-        ChangeImage(1);
+        if (player.mechanicJump)
+        {
+            player.mechanicJump = false;
+            isActive[1] = false;
+        }
+        else
+        {
+            player.mechanicJump = true;
+        }
+        ChangeXMark(1);
         counters[1]++;
     }
 
     public void RotationOptionPress()
     {
-        ChangeImage(2);
+        if (player.mechanicRotation)
+        {
+            player.mechanicRotation = false;
+            isActive[2] = false;
+        }
+        else
+        {
+            player.mechanicRotation = true;
+        }
+
+        ChangeXMark(2);
         counters[2]++;
     }
 
     public void HealthOptionPress()
     {
-        ChangeImage(3);
+        if (player.mechanicHealth)
+        {
+            player.mechanicHealth = false;
+            isActive[3] = false;
+        }
+        else
+        {
+
+            player.mechanicHealth = true;
+        }
+        ChangeXMark(3);
         counters[3]++;
     }
 
     public void CombatOptionPress()
     {
-        ChangeImage(4);
+        ChangeXMark(4);
         counters[4]++;
     }
 
     public void DialogueOptionPress()
     {
-        ChangeImage(5);
+        ChangeXMark(5);
         counters[5]++;
     }
 
-    public void ChangeImage(int imageIndex)
+    public void ChangeXMark(int index)
     {
-        if(counters[imageIndex] % 2 == 0)
+        if (counters[index] % 2 == 0)
         {
-            xMark[imageIndex].text = "X";
+            xMark[index].text = "X";
         }
         else
         {
-            xMark[imageIndex].text = "";
+            xMark[index].text = "";
         }
     }
 
@@ -111,6 +158,18 @@ public class DebugMode : MonoBehaviour
             xMark[optionIndex + 1].color = Color.white;
             selectableMechanics[optionIndex + 1].color = Color.white;
             capacityText[optionIndex + 1].color = Color.white;
+        }
+    }
+
+    private void CheckForActiveMechanic()
+    {
+        for(int i = 0; i < isActive.Count; i++)
+        {
+            if (isActive[i])
+            {
+                xMark[i].text = "X";
+                counters[i] += 1;
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2268425838349837608}
   - component: {fileID: 2268425838349837612}
   m_Layer: 5
-  m_Name: Option Text
+  m_Name: Movement Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,7 +834,7 @@ GameObject:
   - component: {fileID: 2268425840182640065}
   - component: {fileID: 2268425840182640064}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Debug UI Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1647,7 +1647,7 @@ GameObject:
   - component: {fileID: 7744804463212712715}
   - component: {fileID: 7744804463212712712}
   m_Layer: 5
-  m_Name: Option Text
+  m_Name: Combat Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1724,7 +1724,7 @@ GameObject:
   - component: {fileID: 7744804463217345154}
   - component: {fileID: 7744804463217345155}
   m_Layer: 5
-  m_Name: Option Text
+  m_Name: Jumping Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1932,7 +1932,7 @@ GameObject:
   - component: {fileID: 7744804463311338867}
   - component: {fileID: 7744804463311338864}
   m_Layer: 5
-  m_Name: Option Text
+  m_Name: Additional (1) Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2163,7 +2163,7 @@ GameObject:
   - component: {fileID: 7744804463475401223}
   - component: {fileID: 7744804463475401220}
   m_Layer: 5
-  m_Name: Option Text
+  m_Name: Rotation Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2550,7 +2550,7 @@ GameObject:
   - component: {fileID: 7744804463691510776}
   - component: {fileID: 7744804463691510777}
   m_Layer: 5
-  m_Name: Option Text
+  m_Name: Dialogue Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2862,7 +2862,7 @@ GameObject:
   - component: {fileID: 7744804463957946386}
   - component: {fileID: 7744804463957946387}
   m_Layer: 5
-  m_Name: Option Text
+  m_Name: Additiona Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3533,7 +3533,7 @@ GameObject:
   - component: {fileID: 7744804464499985593}
   - component: {fileID: 7744804464499985598}
   m_Layer: 5
-  m_Name: Option Text
+  m_Name: Health Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
