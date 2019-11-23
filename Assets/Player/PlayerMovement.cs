@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float timeSpeed = 1f;
     public float despawnDelay = 3f;
-    public float timeToAttack = 1f;
+    public float timeToAttack = 0.5f;
 
     public bool mechanicJump;
     public bool mechanicRotation;
