@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
-    private RaycastHit hit;
 
     public float speed;
     public float gravityModifier;
@@ -152,9 +151,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (active)
         {
+            var canJump = Physics.Raycast(rb.position, Vector3.down, out var _, 13.5f);
             var keyPressed = Input.GetKeyDown(KeyCode.Space);
             // Jumping when there is a hole in front
-            if (keyPressed && !isJumping)
+            if (canJump && keyPressed && !isJumping)
             {
                 time = 0f;
                 isJumping = true;
