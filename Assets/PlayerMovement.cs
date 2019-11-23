@@ -11,14 +11,22 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float gravityModifier;
     public float jumpForce;
+    public float timeSpeed = 1;
+
+    public bool mechanicJump;
+    public bool mechanicRotation;
+    public bool mechanicMovement;
+    public bool mechanicHealth;
 
     private bool canJump;
     private bool isJumping;
+    private bool isDead;
 
     private float moveInputVertical;
     private float moveInputHorizontal;
     private float horizontalRotation;
     private float verticalRotation;
+    private float health = 1;
     private float t;
 
     // Start is called before the first frame update
@@ -30,20 +38,31 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canJump == true && Input.GetKeyDown(KeyCode.Space)) // Jumping when there is a hole in front
+        Time.timeScale = timeSpeed; // Set time speed
+
+        if (health == 0 || mechanicHealth == false) // Kill player if health is 0 or mechanic is off
         {
-            t = 0;
-            isJumping = true;
-            myRigidbody.velocity = new Vector3(horizontalRotation * jumpForce, jumpForce / 2, verticalRotation * jumpForce);
+            Kill();
         }
-        if (canJump == true && t >= 0.1f) // Stoping jump
+
+        if (mechanicJump == true)
+        {
+            if (canJump == true && Input.GetKeyDown(KeyCode.Space)) // Jumping when there is a hole in front
+            {
+                t = 0;
+                isJumping = true;
+                myRigidbody.velocity = new Vector3(horizontalRotation * jumpForce, jumpForce / 2, verticalRotation * jumpForce);
+            }
+        }
+
+        if (canJump == false && t >= 0.5f) // Stoping jump
         {
             isJumping = false;
         }
 
-        if (isJumping == true) // Timer for jumping only for 0.1 seconds
+        if (isJumping == true) // Timer for jumping only for 0.5 seconds
         {
-            if (t < 0.1f)
+            if (t < 0.5f)
             {
                 t += Time.deltaTime;
             }
@@ -66,16 +85,20 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 past = new Vector3(myRigidbody.velocity.x, 0, myRigidbody.velocity.z); // Velocity before new velocity is created
 
-        if(isJumping == true && t >= 0.1f)
+        if (mechanicMovement == true)
         {
-            myRigidbody.velocity = new Vector3(moveInputHorizontal * speed, myRigidbody.velocity.y, moveInputVertical * speed) + past; // Movement if it jumps
-        }
-        else if(isJumping == false && (t <= 0.15f || Math.Abs(t) < 0.001f))
-        {
-            myRigidbody.velocity = new Vector3(moveInputHorizontal * speed, myRigidbody.velocity.y, moveInputVertical * speed); // Movement if it doesn't jump
+            if (isJumping == true && t >= 0.5f)
+            {
+                myRigidbody.velocity = new Vector3(0, myRigidbody.velocity.y, 0) + past; // Movement if it jumps
+            }
+            else if (isJumping == false && (t <= 0.55f || Math.Abs(t) < 0.001f))
+            {
+                myRigidbody.velocity = new Vector3(moveInputHorizontal * speed, myRigidbody.velocity.y, moveInputVertical * speed); // Movement if it doesn't jump
+            }
         }
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F); // Rotating Player
+        if (mechanicRotation == true)
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F); // Rotating Player
     }
 
     private void Rotate(Vector2 vector)
@@ -120,5 +143,17 @@ public class PlayerMovement : MonoBehaviour
             horizontalRotation = -1;
             verticalRotation = -1;
         }
+    }
+
+    public void Kill()
+    {
+        StartCoroutine(Die());
+    }
+
+    IEnumerator Die()
+    {
+        isDead = true;
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
     }
 }
