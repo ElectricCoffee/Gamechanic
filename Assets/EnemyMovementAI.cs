@@ -118,14 +118,10 @@ public class EnemyMovementAI : MonoBehaviour
             elapsedTime = 0f;
         }
 
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            currentTarget,
-            walkingSpeed * Time.deltaTime);
+        RotateAndMoveTowards(currentTarget, walkingSpeed);
 
         return isWaiting;
     }
-
 
     /// <summary>
     /// Chases the target object
@@ -135,10 +131,31 @@ public class EnemyMovementAI : MonoBehaviour
     {
         currentTarget = GetWithoutY(target.transform.position);
 
+        RotateAndMoveTowards(currentTarget, runningSpeed);
+    }
+
+    /// <summary>
+    /// Combines movement and rotation towards a single target
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="speed"></param>
+    private void RotateAndMoveTowards(Vector3 target, float speed)
+    {
+        var targetDir = target - transform.position;
+        var newDir = Vector3.RotateTowards(
+            transform.forward,
+            targetDir,
+            speed * 2f * Time.deltaTime,
+            0f);
+
+        Debug.DrawRay(transform.position, newDir, Color.red);
+
+        transform.rotation = Quaternion.LookRotation(newDir);
+
         transform.position = Vector3.MoveTowards(
             transform.position,
-            currentTarget,
-            runningSpeed * Time.deltaTime);
+            target,
+            speed * Time.deltaTime);
     }
 
     /// <summary>
