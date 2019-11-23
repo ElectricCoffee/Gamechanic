@@ -43,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Attack());
         }
-            
 
         Time.timeScale = timeSpeed; // Set time speed
 
@@ -53,9 +52,7 @@ public class PlayerMovement : MonoBehaviour
             Kill();
         }
 
-
-
-        if ((Math.Abs(Input.GetAxisRaw("Horizontal")) > 0.0001) || Math.Abs(Input.GetAxisRaw("Vertical")) > 0.0001)
+        if ((Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.0001) || Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.0001)
         {
             gameObject.GetComponentInChildren<Animator>().SetBool("Walking", true);
             print(gameObject.GetComponentInChildren<Animator>().GetBool("Walking"));
@@ -68,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
         rb.velocity += Physics.gravity * gravityModifier * Time.fixedDeltaTime;
 
         moveInput = new Vector3(
