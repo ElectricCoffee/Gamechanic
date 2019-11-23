@@ -20,6 +20,11 @@ public class PlayerMovement : MonoBehaviour
     public bool mechanicRotation;
     public bool mechanicMovement;
     public bool mechanicHealth;
+    public bool mechanicUnlockables;
+    public bool mechanicTimeflow;
+    public bool mechanicCombat;
+    public bool mechanicDialogue;
+    public bool mechanicInteractables;
 
     private Rigidbody rb;
     private bool isJumping;
@@ -40,11 +45,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && mechanicCombat)
         {
             StartCoroutine(Attack());
         }
 
+        if(mechanicTimeflow)
         Time.timeScale = timeSpeed; // Set time speed
 
         // Kill player if health is 0 or mechanic is off
@@ -84,42 +90,48 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Key")
+        if (mechanicUnlockables)
         {
-            other.gameObject.SetActive(false);
-            keys++;
-        }
-        if(other.gameObject.tag == "Door")
-        {
-            other.gameObject.GetComponent<Animator>().SetTrigger("DoorATrigger");
-        }
-        if(other.gameObject.tag == "LockedDoor" && keys > 0)
-        {
+            if (other.gameObject.tag == "Key")
+            {
+                other.gameObject.SetActive(false);
+                keys++;
+            }
+            if (other.gameObject.tag == "Door")
+            {
+                other.gameObject.GetComponent<Animator>().SetTrigger("DoorATrigger");
+            }
+            if (other.gameObject.tag == "LockedDoor" && keys > 0)
+            {
                 other.gameObject.GetComponent<Animator>().SetTrigger("DoorATrigger");
                 other.gameObject.tag = "Door";
                 keys -= 1;
-        }
-        if (other.gameObject.tag == "Chest")
-        {
-            other.gameObject.GetComponent<Animator>().SetTrigger("OpenChest");
-        }
-        if (other.gameObject.tag == "LockedChest" && keys > 0)
-        {
+            }
+            if (other.gameObject.tag == "Chest")
+            {
+                other.gameObject.GetComponent<Animator>().SetTrigger("OpenChest");
+            }
+            if (other.gameObject.tag == "LockedChest" && keys > 0)
+            {
                 other.gameObject.GetComponent<Animator>().SetTrigger("OpenChest");
                 other.gameObject.tag = "Chest";
                 keys--;
+            }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Chest")
+        if (mechanicUnlockables)
         {
-            other.gameObject.GetComponent<Animator>().SetTrigger("CloseChest");
-        }
-        if (other.gameObject.tag == "Door")
-        {
-            other.gameObject.GetComponent<Animator>().SetTrigger("DoorClose");
+            if (other.gameObject.tag == "Chest")
+            {
+                other.gameObject.GetComponent<Animator>().SetTrigger("CloseChest");
+            }
+            if (other.gameObject.tag == "Door")
+            {
+                other.gameObject.GetComponent<Animator>().SetTrigger("DoorClose");
+            }
         }
     }
 
