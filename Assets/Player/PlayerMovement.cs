@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveInput;
     private Vector3 currentRotation;
     private uint health = 1;
+    private uint keys;
     private float time;
 
     // Start is called before the first frame update
@@ -63,6 +64,49 @@ public class PlayerMovement : MonoBehaviour
         HandleRotation(mechanicRotation);
 
         HandleJumping(mechanicJump);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Key")
+        {
+            other.gameObject.SetActive(false);
+            keys++;
+        }
+        if(other.gameObject.tag == "Door")
+        {
+            other.gameObject.GetComponent<Animator>().SetTrigger("DoorATrigger");
+        }
+        if(other.gameObject.tag == "LockedDoor")
+        {
+            if (keys > 0)
+            {
+                other.gameObject.GetComponent<Animator>().SetTrigger("DoorATrigger");
+                other.gameObject.tag = "Door";
+                keys--;
+            }
+        }
+        if (other.gameObject.tag == "Chest")
+        {
+            other.gameObject.GetComponent<Animator>().SetTrigger("OpenChest");
+        }
+        if (other.gameObject.tag == "LockedChest")
+        {
+            if (keys > 0)
+            {
+                other.gameObject.GetComponent<Animator>().SetTrigger("OpenChest");
+                other.gameObject.tag = "Chest";
+                keys--;
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Chest")
+        {
+            other.gameObject.GetComponent<Animator>().SetTrigger("CloseChest");
+        }
     }
 
     private void Rotate(Vector3 vector)
