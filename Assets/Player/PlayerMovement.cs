@@ -77,27 +77,21 @@ public class PlayerMovement : MonoBehaviour
         {
             other.gameObject.GetComponent<Animator>().SetTrigger("DoorATrigger");
         }
-        if(other.gameObject.tag == "LockedDoor")
+        if(other.gameObject.tag == "LockedDoor" && keys > 0)
         {
-            if (keys > 0)
-            {
                 other.gameObject.GetComponent<Animator>().SetTrigger("DoorATrigger");
                 other.gameObject.tag = "Door";
-                keys--;
-            }
+                keys -= 1;
         }
         if (other.gameObject.tag == "Chest")
         {
             other.gameObject.GetComponent<Animator>().SetTrigger("OpenChest");
         }
-        if (other.gameObject.tag == "LockedChest")
+        if (other.gameObject.tag == "LockedChest" && keys > 0)
         {
-            if (keys > 0)
-            {
                 other.gameObject.GetComponent<Animator>().SetTrigger("OpenChest");
                 other.gameObject.tag = "Chest";
                 keys--;
-            }
         }
     }
 
