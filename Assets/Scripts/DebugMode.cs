@@ -6,13 +6,17 @@ using TMPro;
 
 public class DebugMode : MonoBehaviour
 {
-    [SerializeField] Button movementOption;
+    [SerializeField] Button[] mechanicsOptions;
     [SerializeField] Image[] xMarkImages;
     [SerializeField] Sprite imageSprite;
-    
+
     void Start()
     {
-        movementOption.GetComponent<Button>();
+        foreach(Button button in mechanicsOptions)
+        {
+            button.GetComponent<Button>();
+        }
+
         foreach(Image img in xMarkImages)
         {
             img.GetComponent<Image>();
@@ -24,8 +28,38 @@ public class DebugMode : MonoBehaviour
     
     public void MovementOptionPress()
     {
-        Debug.Log(movementOption.gameObject.name + " was pressed.");
+        Debug.Log(mechanicsOptions[0].gameObject.name + " was pressed.");
         ChangeImage(0);
+    }
+
+    public void JumpingOptionPress()
+    {
+        Debug.Log(mechanicsOptions[1].gameObject.name + " was pressed.");
+        ChangeImage(1);
+    }
+
+    public void RotationOptionPress()
+    {
+        Debug.Log(mechanicsOptions[2].gameObject.name + " was pressed.");
+        ChangeImage(2);
+    }
+
+    public void HealthOptionPress()
+    {
+        Debug.Log(mechanicsOptions[3].gameObject.name + " was pressed.");
+        ChangeImage(3);
+    }
+
+    public void CombatOptionPress()
+    {
+        Debug.Log(mechanicsOptions[4].gameObject.name + " was pressed.");
+        ChangeImage(4);
+    }
+
+    public void DialogueOptionPress()
+    {
+        Debug.Log(mechanicsOptions[5].gameObject.name + " was pressed.");
+        ChangeImage(5);
     }
 
     public void ChangeImage(int imageIndex)
