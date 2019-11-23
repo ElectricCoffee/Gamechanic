@@ -24,10 +24,9 @@ public class PlayerMovement : MonoBehaviour
 
     private float moveInputVertical;
     private float moveInputHorizontal;
-    private float horizontalRotation;
-    private float verticalRotation;
-    private float health = 1;
-    private float t;
+    private Vector2 currentRotation;
+    private float health = 1f; // shouldn't this be a uint?
+    private float t; // what the hell is 't'?
 
     // Start is called before the first frame update
     void Start()
@@ -40,25 +39,28 @@ public class PlayerMovement : MonoBehaviour
     {
         Time.timeScale = timeSpeed; // Set time speed
 
-        if (health == 0 || mechanicHealth == false) // Kill player if health is 0 or mechanic is off
+        // Kill player if health is 0 or mechanic is off
+        if (Math.Abs(health) < Mathf.Epsilon || mechanicHealth == false)
         {
             Kill();
         }
 
         if (mechanicJump == true)
         {
-            if (canJump == true && Input.GetKeyDown(KeyCode.Space) && isJumping == false) // Jumping when there is a hole in front
+            var keyPressed = Input.GetKeyDown(KeyCode.Space);
+            // Jumping when there is a hole in front
+            if (canJump == true && keyPressed && isJumping == false)
             {
                 t = 0;
                 isJumping = true;
-                myRigidbody.velocity = new Vector3(horizontalRotation * jumpForce, jumpForce / 2, verticalRotation * jumpForce);
+                myRigidbody.velocity = new Vector3 (
+                    currentRotation.x * jumpForce,
+                    jumpForce / 2,
+                    currentRotation.y * jumpForce);
             }
         }
 
-        if (canJump == false && t >= 0.5f) // Stoping jump
-        {
-            isJumping = false;
-        }
+        isJumping &= (canJump != false || t < 0.5f);
 
         if (isJumping == true) // Timer for jumping only for 0.5 seconds
         {
@@ -71,77 +73,87 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        canJump = !Physics.Raycast(new Vector3(myRigidbody.position.x, myRigidbody.position.y, myRigidbody.position.z) + (transform.forward * 4), Vector3.down, out hit , 13.5f); // Raycast that checks if there is a hole in front of the Player
-        
+        // Raycast that checks if there is a hole in front of the Player
+        canJump = !Physics.Raycast(
+            myRigidbody.position + (transform.forward * 4),
+            Vector3.down,
+            out hit,
+            13.5f);
 
-        myRigidbody.velocity += Physics.gravity * gravityModifier * Time.deltaTime;
+
+        myRigidbody.velocity += Physics.gravity * gravityModifier * Time.fixedDeltaTime;
 
         moveInputHorizontal = Input.GetAxisRaw("Horizontal");
         moveInputVertical = Input.GetAxisRaw("Vertical");
 
-        Rotate(new Vector2(moveInputHorizontal, moveInputVertical)); // Method for setting facing direction
+        // Method for setting facing direction
+        Rotate(new Vector2(moveInputHorizontal, moveInputVertical));
 
-        Vector3 movement = new Vector3(horizontalRotation, 0.0f, verticalRotation); // Vector showing where is the Player facing
+        // Vector showing where is the Player facing
+        Vector3 movement = new Vector3(currentRotation.x, 0.0f, currentRotation.y);
 
-        Vector3 past = new Vector3(myRigidbody.velocity.x, 0, myRigidbody.velocity.z); // Velocity before new velocity is created
+        // Velocity before new velocity is created
+        Vector3 past = new Vector3(myRigidbody.velocity.x, 0, myRigidbody.velocity.z);
 
-        if (mechanicMovement == true)
+        if (mechanicMovement)
         {
-            if (isJumping == true && t >= 0.5f)
+            if (isJumping && t >= 0.5f)
             {
-                myRigidbody.velocity = new Vector3(0, myRigidbody.velocity.y, 0) + past; // Movement if it jumps
+                myRigidbody.velocity = new Vector3(0, myRigidbody.velocity.y, 0) + past;
             }
-            else if (isJumping == false && (t <= 0.55f || Math.Abs(t) < 0.001f))
+            else if (!isJumping && (t <= 0.55f || Math.Abs(t) < 0.001f))
             {
-                myRigidbody.velocity = new Vector3(moveInputHorizontal * speed, myRigidbody.velocity.y, moveInputVertical * speed); // Movement if it doesn't jump
+                myRigidbody.velocity = new Vector3(
+                    moveInputHorizontal * speed,
+                    myRigidbody.velocity.y,
+                    moveInputVertical * speed);
             }
         }
 
-        if (mechanicRotation == true)
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F); // Rotating Player
+        if (mechanicRotation)
+        {
+            // Rotating the Player
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(movement),
+                0.15F);
+        }
     }
 
     private void Rotate(Vector2 vector)
     {
-        if (vector == new Vector2(1,1))
+        
+        if (vector == Vector2.one)
         {
-            horizontalRotation = 1;
-            verticalRotation = 1;
+            currentRotation = Vector2.one;
         }
-        else if (vector == new Vector2(1, 0))
+        else if (vector == Vector2.right)
         {
-            horizontalRotation = 1;
-            verticalRotation = 0;
+            currentRotation = Vector2.right;
         }
-        else if (vector == new Vector2(1, -1))
+        else if (vector == new Vector2(1f, -1f))
         {
-            horizontalRotation = 1;
-            verticalRotation = -1;
+            currentRotation = new Vector2(1f, -1f);
         }
-        else if (vector == new Vector2(0, 1))
+        else if (vector == Vector2.up)
         {
-            horizontalRotation = 0;
-            verticalRotation = 1;
+            currentRotation = Vector2.up;
         }
-        else if (vector == new Vector2(0, -1))
+        else if (vector == Vector2.down)
         {
-            horizontalRotation = 0;
-            verticalRotation = -1;
+            currentRotation = Vector2.down;
         }
-        else if (vector == new Vector2(-1, 1))
+        else if (vector == new Vector2(-1f, 1f))
         {
-            horizontalRotation = -1;
-            verticalRotation = 1;
+            currentRotation = new Vector2(-1f, 1f);
         }
-        else if (vector == new Vector2(-1, 0))
+        else if (vector == Vector2.left)
         {
-            horizontalRotation = -1;
-            verticalRotation = 0;
+            currentRotation = Vector2.left;
         }
-        else if (vector == new Vector2(-1, -1))
+        else if (vector == new Vector2(-1f, -1f))
         {
-            horizontalRotation = -1;
-            verticalRotation = -1;
+            currentRotation = new Vector2(-1f, -1f);
         }
     }
 
