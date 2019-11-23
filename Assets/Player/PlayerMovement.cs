@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody rb;
-    private RaycastHit hit;
+    private const float JUMPING_TIME = 0.5f;
+    private const float JUMP_HEIGHT = 13.5f;
+    private const float SLERP_TIME = 0.15f;
 
     public float speed;
     public float gravityModifier;
     public float jumpForce;
     public float timeSpeed = 1f;
+    public float despawnDelay = 3;
 
     public bool mechanicJump;
     public bool mechanicRotation;
     public bool mechanicMovement;
     public bool mechanicHealth;
 
+    private Rigidbody rb;
     private bool isJumping;
     private bool isDead;
 
     private Vector3 moveInput;
     private Vector3 currentRotation;
     private uint health = 1;
-    private float time; // what the hell is 't'?
+    private float time;
 
     // Start is called before the first frame update
     void Start()
@@ -108,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Die()
     {
         isDead = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(despawnDelay);
         Destroy(gameObject);
     }
 
@@ -119,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
             // Velocity before new velocity is created
             Vector3 past = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             // Jumping uses a different velocity from moving on the ground
-            if (isJumping && time >= 0.5f)
+            if (isJumping && time >= JUMPING_TIME)
             {
                 rb.velocity = new Vector3(0f, rb.velocity.y, 0f) + past;
             }
@@ -144,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 Quaternion.LookRotation(orientation),
-                0.15f);
+                SLERP_TIME);
         }
     }
 
@@ -152,9 +154,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (active)
         {
+            var canJump = Physics.Raycast(rb.position, Vector3.down, out var _, JUMP_HEIGHT);
             var keyPressed = Input.GetKeyDown(KeyCode.Space);
             // Jumping when there is a hole in front
-            if (keyPressed && !isJumping)
+            if (canJump && keyPressed && !isJumping)
             {
                 time = 0f;
                 isJumping = true;
@@ -165,12 +168,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        isJumping &= (time < 0.5f);
+        isJumping &= (time < JUMPING_TIME);
 
         // Timer for jumping only for 0.5 seconds
         if (isJumping)
         {
-            if (time < 0.5f)
+            if (time < JUMPING_TIME)
             {
                 time += Time.deltaTime;
             }
