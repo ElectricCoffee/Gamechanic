@@ -878,6 +878,26 @@ PrefabInstance:
       propertyPath: mechanicUnlockables
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2205089436537242029, guid: 906d23a675456ed40a41a5e8658aa230,
+        type: 3}
+      propertyPath: mechanicTimeflow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205089436537242029, guid: 906d23a675456ed40a41a5e8658aa230,
+        type: 3}
+      propertyPath: mechanicCombat
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205089436537242029, guid: 906d23a675456ed40a41a5e8658aa230,
+        type: 3}
+      propertyPath: mechanicDialogue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205089436537242029, guid: 906d23a675456ed40a41a5e8658aa230,
+        type: 3}
+      propertyPath: mechanicInteractables
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 906d23a675456ed40a41a5e8658aa230, type: 3}
 --- !u!114 &1317287014 stripped
