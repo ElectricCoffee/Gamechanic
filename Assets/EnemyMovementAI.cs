@@ -175,4 +175,14 @@ public class EnemyMovementAI : MonoBehaviour
     {
         visibleObjects.Remove(other.gameObject);
     }
+    public void Kill()
+    {
+        StartCoroutine(Die());
+    }
+
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
 }

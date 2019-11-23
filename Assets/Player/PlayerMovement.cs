@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public bool mechanicHealth;
 
     private Rigidbody rb;
-    public bool isJumping;
+    private bool isJumping;
     private bool isDead;
 
     private Vector3 moveInput;
@@ -43,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Attack());
         }
-            
 
         Time.timeScale = timeSpeed; // Set time speed
 
@@ -51,6 +51,16 @@ public class PlayerMovement : MonoBehaviour
         if (health == 0 || !mechanicHealth)
         {
             Kill();
+        }
+
+        if ((Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.0001) || Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.0001)
+        {
+            gameObject.GetComponentInChildren<Animator>().SetBool("Walking", true);
+            print(gameObject.GetComponentInChildren<Animator>().GetBool("Walking"));
+        }
+        else
+        {
+            gameObject.GetComponentInChildren<Animator>().SetBool("Walking", false);
         }
     }
 
@@ -161,11 +171,11 @@ public class PlayerMovement : MonoBehaviour
         isDead = true;
         yield return new WaitForSeconds(despawnDelay);
         Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     IEnumerator Attack()
     {
-        Debug.Log("1");
         gameObject.GetComponentInChildren<Animator>().SetBool("Attacking", true);
         gameObject.GetComponentInChildren<Animator>().Play("Attack");
         yield return new WaitForSeconds(timeToAttack);
