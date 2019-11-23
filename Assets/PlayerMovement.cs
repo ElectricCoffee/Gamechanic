@@ -18,14 +18,13 @@ public class PlayerMovement : MonoBehaviour
     public bool mechanicMovement;
     public bool mechanicHealth;
 
-    private bool canJump;
     private bool isJumping;
     private bool isDead;
 
     private Vector2 moveInput;
     private Vector2 currentRotation;
     private uint health = 1;
-    private float t; // what the hell is 't'?
+    private float time; // what the hell is 't'?
 
     // Start is called before the first frame update
     void Start()
@@ -48,9 +47,9 @@ public class PlayerMovement : MonoBehaviour
         {
             var keyPressed = Input.GetKeyDown(KeyCode.Space);
             // Jumping when there is a hole in front
-            if (canJump && keyPressed && !isJumping)
+            if (keyPressed && !isJumping)
             {
-                t = 0f;
+                time = 0f;
                 isJumping = true;
                 rb.velocity = new Vector3 (
                     currentRotation.x * jumpForce,
@@ -59,28 +58,20 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        isJumping &= (canJump || t < 0.5f);
+        isJumping &= (time < 0.5f);
 
         // Timer for jumping only for 0.5 seconds
         if (isJumping)
         {
-            if (t < 0.5f)
+            if (time < 0.5f)
             {
-                t += Time.deltaTime;
+                time += Time.deltaTime;
             }
         }
     }
 
     void FixedUpdate()
     {
-        // Raycast that checks if there is a hole in front of the Player
-        canJump = !Physics.Raycast(
-            rb.position + (transform.forward * 4f),
-            Vector3.down,
-            out hit,
-            13.5f);
-
-
         rb.velocity += Physics.gravity * gravityModifier * Time.fixedDeltaTime;
 
         moveInput = new Vector2(
@@ -98,11 +89,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (mechanicMovement)
         {
-            if (isJumping && t >= 0.5f)
+            if (isJumping && time >= 0.5f)
             {
                 rb.velocity = new Vector3(0f, rb.velocity.y, 0f) + past;
             }
-            else if (!isJumping && (t <= 0.55f || Math.Abs(t) < Mathf.Epsilon))
+            else if (!isJumping && (time <= 0.55f || Math.Abs(time) < Mathf.Epsilon))
             {
                 rb.velocity = new Vector3(
                     moveInput.x * speed,
