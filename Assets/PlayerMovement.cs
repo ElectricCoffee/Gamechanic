@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (mechanicJump == true)
         {
-            if (canJump == true && Input.GetKeyDown(KeyCode.Space)) // Jumping when there is a hole in front
+            if (canJump == true && Input.GetKeyDown(KeyCode.Space) && isJumping == false) // Jumping when there is a hole in front
             {
                 t = 0;
                 isJumping = true;
