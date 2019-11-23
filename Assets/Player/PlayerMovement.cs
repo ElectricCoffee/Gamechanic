@@ -21,14 +21,14 @@ public class PlayerMovement : MonoBehaviour
     public bool mechanicHealth;
 
     private Rigidbody rb;
-    private bool isJumping;
+    public bool isJumping;
     private bool isDead;
 
     private Vector3 moveInput;
     private Vector3 currentRotation;
     private uint health = 1;
     private uint keys;
-    private float time;
+    public float time;
 
     // Start is called before the first frame update
     void Start()
