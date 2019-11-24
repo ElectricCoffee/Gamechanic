@@ -33,7 +33,7 @@ public class DebugMode : MonoBehaviour
 
     void Start()
     {
-        player.GetComponent<PlayerMovement>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         counters = new int[mechanicsOptions.Length];
         isActive = new List<bool>{
             player.mechanicMovement,
