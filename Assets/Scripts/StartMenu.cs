@@ -9,8 +9,11 @@ public class StartMenu : MonoBehaviour
     [SerializeField] Text[] menuOptions;
     int optionIndex = 0;
 
+    SaveManagerController saver;
+
     void Update()
     {
+        saver = gameObject.GetComponent<SaveManagerController>();
         MenuTextColors();
     }
 
@@ -47,6 +50,8 @@ public class StartMenu : MonoBehaviour
 
     public void StartGame()
     {
+        saver.Reset();
+        saver.Save();
         SceneManager.LoadScene("Level1");
         SceneManager.UnloadSceneAsync("StartMenu");
     }

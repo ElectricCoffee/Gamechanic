@@ -310,6 +310,19 @@ MonoBehaviour:
   menuOptions:
   - {fileID: 496510743}
   - {fileID: 1132016889}
+--- !u!114 &698565572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698565570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f5a8e09f75fd82458d1f7e7904cd29b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filepath: mechanics.sav
 --- !u!114 &1132016889 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4316513928229394245, guid: 33eb7d4633dab3747b949ed19db16619,
