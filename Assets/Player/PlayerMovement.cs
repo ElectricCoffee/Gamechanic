@@ -36,11 +36,24 @@ public class PlayerMovement : MonoBehaviour
     private uint keys;
     public float time;
 
+    private SaveManagerController saver;
+
     // Start is called before the first frame update
     void Start()
     {
+        saver = GetComponent<SaveManagerController>();
         rb = gameObject.GetComponent<Rigidbody>();
-    }
+
+        mechanicJump = saver.Get(GameMechanic.Jumping);
+        mechanicRotation = saver.Get(GameMechanic.Rotation);
+        mechanicMovement = saver.Get(GameMechanic.Movement);
+        mechanicHealth = saver.Get(GameMechanic.Health);
+        mechanicUnlockables = saver.Get(GameMechanic.Unlockables);
+        mechanicTimeflow = saver.Get(GameMechanic.TimeFlow);
+        mechanicCombat = saver.Get(GameMechanic.Combat);
+        mechanicDialogue = saver.Get(GameMechanic.Dialogue);
+        mechanicInteractables = saver.Get(GameMechanic.Interactibles);
+}
 
     // Update is called once per frame
     void Update()
@@ -182,6 +195,7 @@ public class PlayerMovement : MonoBehaviour
         isDead = true;
         yield return new WaitForSeconds(despawnDelay);
         Destroy(gameObject);
+        saver.Save();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

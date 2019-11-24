@@ -7,10 +7,12 @@ public class VictoryTileTrigger : MonoBehaviour
 {
     [SerializeField] private string nextLevel;
 
+    private SaveManagerController saver;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        saver = GetComponent<SaveManagerController>();
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class VictoryTileTrigger : MonoBehaviour
     {
         if (other.gameObject.name.Contains("Player"))
         {
+            saver.Save();
             SceneManager.LoadScene(nextLevel);
         }
     }
