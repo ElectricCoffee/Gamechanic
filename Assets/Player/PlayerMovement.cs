@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        saver = GetComponent<SaveManagerController>();
+        saver = gameObject.GetComponent<SaveManagerController>();
         rb = gameObject.GetComponent<Rigidbody>();
 
         mechanicJump = saver.Get(GameMechanic.Jumping);
@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         mechanicInteractables = saver.Get(GameMechanic.Interactibles);
 
         saver.DebugLog();
-}
+    }
 
     // Update is called once per frame
     void Update()

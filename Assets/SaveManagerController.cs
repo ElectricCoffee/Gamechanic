@@ -51,6 +51,7 @@ public class SaveManagerController : MonoBehaviour
     /// </summary>
     public void Reset()
     {
+        Debug.Log("Resetting Save Data");
         mechanics = new byte[9];
         mechanics[(uint)GameMechanic.Health] = 1;
         mechanics[(uint)GameMechanic.Movement] = 1;
@@ -96,6 +97,7 @@ public class SaveManagerController : MonoBehaviour
     /// </summary>
     public void Save()
     {
+        Debug.Log("Saving " + filepath);
         using (var fw = File.OpenWrite(filepath))
         {
             fw.Write(mechanics, 0, 9);
