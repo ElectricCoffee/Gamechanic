@@ -85,3 +85,16 @@ MonoBehaviour:
   - {fileID: 0}
   imageSprite: {fileID: 21300000, guid: 4458a2bec7ad09444b253fa32c25410a, type: 3}
   player: {fileID: 0}
+  kbAvailable: {fileID: 0}
+  kbUsed: {fileID: 0}
+  mMovementKB: 5
+  mJump: 5
+  mRotation: 5
+  mHealth: 5
+  mCombat: 5
+  mDialogue: 5
+  mUnlockables: 10
+  mTimeFlow: 10
+  mInteractables: 10
+  maxKB: 20
+  currentKB: 0
