@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private bool isJumping;
     private bool isDead;
+    private AudioSource audio;
+    private SaveManagerController saver;
 
     private Vector3 moveInput;
     private Vector3 currentRotation;
@@ -36,10 +38,27 @@ public class PlayerMovement : MonoBehaviour
     private uint keys;
     public float time;
 
+    public AudioClip walking;
+    public AudioClip attack;
+
     // Start is called before the first frame update
     void Start()
     {
+        saver = gameObject.GetComponent<SaveManagerController>();
         rb = gameObject.GetComponent<Rigidbody>();
+        audio = gameObject.GetComponent<AudioSource>();
+
+        mechanicJump = saver.Get(GameMechanic.Jumping);
+        mechanicRotation = saver.Get(GameMechanic.Rotation);
+        mechanicMovement = saver.Get(GameMechanic.Movement);
+        mechanicHealth = saver.Get(GameMechanic.Health);
+        mechanicUnlockables = saver.Get(GameMechanic.Unlockables);
+        mechanicTimeflow = saver.Get(GameMechanic.TimeFlow);
+        mechanicCombat = saver.Get(GameMechanic.Combat);
+        mechanicDialogue = saver.Get(GameMechanic.Dialogue);
+        mechanicInteractables = saver.Get(GameMechanic.Interactibles);
+
+        saver.DebugLog();
     }
 
     // Update is called once per frame
@@ -69,12 +88,27 @@ public class PlayerMovement : MonoBehaviour
 
         if ((Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.0001) || Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.0001)
         {
+            StartCoroutine(WalkSound());
             StartCoroutine(Walk());
         }
         else
         {
             StartCoroutine(StopWalk());
         }
+    }
+
+    IEnumerator AttackSound()
+    {
+        if (!audio.isPlaying)
+            audio.PlayOneShot(attack, 1f);
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator WalkSound()
+    {
+        if(!audio.isPlaying)
+            audio.PlayOneShot(walking, 1f);
+        yield return new WaitForSeconds(1f);
     }
 
     void FixedUpdate()
@@ -208,8 +242,10 @@ public class PlayerMovement : MonoBehaviour
     {
         gameObject.GetComponentInChildren<Animator>().SetBool("Attacking", true);
         gameObject.GetComponentInChildren<Animator>().Play("Attack");
+        StartCoroutine(AttackSound());
         yield return new WaitForSeconds(timeToAttack);
         gameObject.GetComponentInChildren<Animator>().SetBool("Attacking", false);
+
     }
 
     private void HandleMovement(bool active)
