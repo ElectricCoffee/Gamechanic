@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip walking;
     public AudioClip attack;
 
+    private const string levelFile = "LEVEL.sav";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,10 +74,24 @@ public class PlayerMovement : MonoBehaviour
             {
                 StartCoroutine(Attack());
             }
+
+           
         }
         else
         {
             gameObject.transform.GetChild(0).GetChild(2).GetChild(0).gameObject.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl)){
+            /*lastScene.setLastLevel(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("UI Canvas");*/
+            using (var fw = File.OpenWrite(levelFile))
+            {
+                var level = new byte[] { (byte)SceneManager.GetActiveScene().buildIndex };
+                fw.Write(level, 0, 1);
+            }
+
+            SceneManager.LoadScene("UI Canvas");
         }
 
         if(mechanicTimeflow)

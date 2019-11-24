@@ -11,6 +11,8 @@ TagManager:
   - LockedChest
   - Weapon
   - Clock
+  - LEVEL
+  - MECHANICS
   layers:
   - Default
   - TransparentFX

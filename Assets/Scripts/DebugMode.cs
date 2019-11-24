@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DebugMode : MonoBehaviour
 {
@@ -31,8 +32,12 @@ public class DebugMode : MonoBehaviour
     public int maxKB = 20;
     public int currentKB = 0;
 
+    private const string levelIndex = "LEVEL.sav";
+    private SaveManagerController saver;
+
     void Start()
     {
+        saver = gameObject.GetComponent<SaveManagerController>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         counters = new int[mechanicsOptions.Length];
         isActive = new List<bool>{
@@ -88,7 +93,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(0);
             counters[0]++;
         }
-
+        saver.Toggle(GameMechanic.Movement);
     }
 
     public void JumpingOptionPress()
@@ -107,7 +112,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(1);
             counters[1]++;
         }
-
+        saver.Toggle(GameMechanic.Jumping);
     }
 
     public void RotationOptionPress()
@@ -126,7 +131,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(2);
             counters[2]++;
         }
-
+        saver.Toggle(GameMechanic.Rotation);
     }
 
     public void HealthOptionPress()
@@ -145,7 +150,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(3);
             counters[3]++;
         }
-
+        saver.Toggle(GameMechanic.Health);
     }
 
     public void CombatOptionPress()
@@ -164,7 +169,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(4);
             counters[4]++;
         }
-
+        saver.Toggle(GameMechanic.Combat);
     }
 
     public void DialogueOptionPress()
@@ -183,7 +188,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(5);
             counters[5]++;
         }
-
+        saver.Toggle(GameMechanic.Dialogue);
     }
 
     public void UnlockablesOptionPress()
@@ -202,7 +207,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(6);
             counters[6]++;
         }
-
+        saver.Toggle(GameMechanic.Unlockables);
     }
 
     public void TimeflowOptionPress()
@@ -221,7 +226,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(7);
             counters[7]++;
         }
-
+        saver.Toggle(GameMechanic.TimeFlow);
     }
 
     public void InteractablesOptionPress()
@@ -240,18 +245,18 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(8);
             counters[8]++;
         }
-
+        saver.Toggle(GameMechanic.Interactibles);
     }
 
     public void ChangeXMark(int index)
     {
         if (counters[index] % 2 == 0)
         {
-            xMark[index].text = "X";
+            xMark[index].text = "[X]";
         }
         else
         {
-            xMark[index].text = "";
+            xMark[index].text = "[ ]";
         }
     }
 
@@ -298,7 +303,7 @@ public class DebugMode : MonoBehaviour
         {
             if (isActive[i])
             {
-                xMark[i].text = "X";
+                xMark[i].text = "[X]";
                 AddKB(Int32.Parse(capacityText[i].text));
                 counters[i]++;
             }
@@ -323,5 +328,22 @@ public class DebugMode : MonoBehaviour
         currentKB -= mechanic;
         kbAvailable.text = maxKB.ToString();
         kbUsed.text = currentKB.ToString();
+    }
+
+    public void LoadScene()
+    {
+        if (!System.IO.File.Exists(levelIndex))
+        {
+            using (var fw = System.IO.File.OpenWrite(levelIndex))
+            {
+                fw.Write(new byte[] { 0 }, 0, 1);
+            }
+        }
+        using (var fr = System.IO.File.OpenRead(levelIndex))
+        {
+            int index = fr.ReadByte();
+            saver.Save();
+            SceneManager.LoadScene(index);
+        }
     }
 }
