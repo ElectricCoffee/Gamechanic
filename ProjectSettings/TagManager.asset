@@ -10,7 +10,6 @@ TagManager:
   - Chest
   - LockedChest
   - Weapon
-  - Clock
   layers:
   - Default
   - TransparentFX

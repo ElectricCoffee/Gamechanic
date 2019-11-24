@@ -11,11 +11,6 @@ public class CameraController : MonoBehaviour
     private Vector3 desiredPossition;
 
     // LateUpdate is called after Update each frame
-    private void Start()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        lookAt = player.transform;
-    }
     void LateUpdate()
     {
         Vector3 delta = Vector3.zero;
