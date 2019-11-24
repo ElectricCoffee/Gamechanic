@@ -929,46 +929,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2268425839151181388, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 826377173}
     - target: {fileID: 2268425838349837613, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
         type: 3}
       propertyPath: m_Name
       value: Movement Text
       objectReference: {fileID: 0}
-    - target: {fileID: 7744804463310801225, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+    - target: {fileID: 2268425839151181388, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 826377173}
-    - target: {fileID: 7744804463217345153, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Jumping Text
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744804464542649739, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+    - target: {fileID: 7744804462940987693, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 826377173}
-    - target: {fileID: 7744804463475401242, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Rotation Text
-      objectReference: {fileID: 0}
     - target: {fileID: 7744804463067309381, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 826377173}
-    - target: {fileID: 7744804464499985596, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Text
-      objectReference: {fileID: 0}
     - target: {fileID: 7744804463072915185, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -979,27 +959,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Combat Text
       objectReference: {fileID: 0}
-    - target: {fileID: 7744804464432124948, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 826377173}
-    - target: {fileID: 7744804463691510783, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+    - target: {fileID: 7744804463217345153, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
         type: 3}
       propertyPath: m_Name
-      value: Dialogue Text
+      value: Jumping Text
       objectReference: {fileID: 0}
-    - target: {fileID: 7744804462940987693, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 826377173}
-    - target: {fileID: 7744804463957946385, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
-        type: 3}
-      propertyPath: m_Name
-      value: Additional Text
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744804464560849256, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+    - target: {fileID: 7744804463310801225, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1009,6 +974,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Additional (1) Text
       objectReference: {fileID: 0}
+    - target: {fileID: 7744804463475401242, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+        type: 3}
+      propertyPath: m_Name
+      value: Rotation Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744804463691510783, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+        type: 3}
+      propertyPath: m_Name
+      value: Dialogue Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744804463957946385, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+        type: 3}
+      propertyPath: m_Name
+      value: Additional Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744804464432124948, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 826377173}
+    - target: {fileID: 7744804464499985596, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+        type: 3}
+      propertyPath: m_Name
+      value: Health Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744804464542649739, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 826377173}
+    - target: {fileID: 7744804464560849256, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 826377173}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ccd9eb59dea5dc42b5bafb3f94817ba, type: 3}
 --- !u!114 &8358685203772222521 stripped
