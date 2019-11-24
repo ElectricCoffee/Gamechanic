@@ -85,10 +85,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl)){
             /*lastScene.setLastLevel(SceneManager.GetActiveScene().name);
             SceneManager.LoadScene("UI Canvas");*/
-            using (var fw = File.OpenWrite(levelFile))
+            if (!SceneManager.GetActiveScene().name.Equals("UI Canvas"))
             {
-                var level = new byte[] { (byte)SceneManager.GetActiveScene().buildIndex };
-                fw.Write(level, 0, 1);
+                using (var fw = File.OpenWrite(levelFile))
+                {
+                    var level = new byte[] { (byte)SceneManager.GetActiveScene().buildIndex };
+                    fw.Write(level, 0, 1);
+                }
             }
 
             SceneManager.LoadScene("UI Canvas");
