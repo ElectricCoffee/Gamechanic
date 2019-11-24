@@ -183,14 +183,6 @@ public class EnemyMovementAI : MonoBehaviour
         StartCoroutine(Die());
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Weapon")
-        {
-            Kill();
-        }
-    }
-
     IEnumerator Die()
     {
         yield return new WaitForSeconds(1f);
