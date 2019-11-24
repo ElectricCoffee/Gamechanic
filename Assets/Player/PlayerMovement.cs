@@ -45,9 +45,17 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && mechanicCombat)
+        if (mechanicCombat)
         {
-            StartCoroutine(Attack());
+            gameObject.transform.GetChild(0).GetChild(2).GetChild(0).gameObject.SetActive(true);
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(Attack());
+            }
+        }
+        else
+        {
+            gameObject.transform.GetChild(0).GetChild(2).GetChild(0).gameObject.SetActive(false);
         }
 
         if(mechanicTimeflow)
