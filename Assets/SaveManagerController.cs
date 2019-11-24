@@ -39,8 +39,10 @@ public class SaveManagerController : MonoBehaviour
             Save();
         }
 
-        using var fr = File.OpenRead(filepath);
-        fr.Read(mechanics, 0, 9);
+        using (var fr = File.OpenRead(filepath))
+        {
+            fr.Read(mechanics, 0, 9);
+        }
     }
 
     /// <summary>
@@ -94,7 +96,22 @@ public class SaveManagerController : MonoBehaviour
     /// </summary>
     public void Save()
     {
-        using var fw = File.OpenWrite(filepath);
-        fw.Write(mechanics, 0, 9);
+        using (var fw = File.OpenWrite(filepath))
+        {
+            fw.Write(mechanics, 0, 9);
+        }
+    }
+
+    public void DebugLog()
+    {
+        Debug.Log("Health: " + Get(GameMechanic.Health));
+        Debug.Log("Movement: " + Get(GameMechanic.Movement));
+        Debug.Log("Rotation: " + Get(GameMechanic.Rotation));
+        Debug.Log("Jumping: " + Get(GameMechanic.Jumping));
+        Debug.Log("Combat: " + Get(GameMechanic.Combat));
+        Debug.Log("Dialogue: " + Get(GameMechanic.Dialogue));
+        Debug.Log("Unlockables: " + Get(GameMechanic.Unlockables));
+        Debug.Log("TimeFlow: " + Get(GameMechanic.TimeFlow));
+        Debug.Log("Interactibles: " + Get(GameMechanic.Interactibles));
     }
 }

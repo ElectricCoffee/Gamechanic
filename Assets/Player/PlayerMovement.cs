@@ -53,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
         mechanicCombat = saver.Get(GameMechanic.Combat);
         mechanicDialogue = saver.Get(GameMechanic.Dialogue);
         mechanicInteractables = saver.Get(GameMechanic.Interactibles);
+
+        saver.DebugLog();
 }
 
     // Update is called once per frame
