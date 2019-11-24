@@ -93,7 +93,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(0);
             counters[0]++;
         }
-        saver.Toggle(GameMechanic.Movement);
+        saver.Set(GameMechanic.Movement, player.mechanicMovement);
     }
 
     public void JumpingOptionPress()
@@ -112,7 +112,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(1);
             counters[1]++;
         }
-        saver.Toggle(GameMechanic.Jumping);
+        saver.Set(GameMechanic.Jumping, player.mechanicJump);
     }
 
     public void RotationOptionPress()
@@ -131,7 +131,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(2);
             counters[2]++;
         }
-        saver.Toggle(GameMechanic.Rotation);
+        saver.Set(GameMechanic.Rotation, player.mechanicRotation);
     }
 
     public void HealthOptionPress()
@@ -150,7 +150,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(3);
             counters[3]++;
         }
-        saver.Toggle(GameMechanic.Health);
+        saver.Set(GameMechanic.Health, player.mechanicHealth);
     }
 
     public void CombatOptionPress()
@@ -169,7 +169,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(4);
             counters[4]++;
         }
-        saver.Toggle(GameMechanic.Combat);
+        saver.Set(GameMechanic.Combat, player.mechanicCombat);
     }
 
     public void DialogueOptionPress()
@@ -188,7 +188,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(5);
             counters[5]++;
         }
-        saver.Toggle(GameMechanic.Dialogue);
+        saver.Set(GameMechanic.Dialogue, player.mechanicDialogue);
     }
 
     public void UnlockablesOptionPress()
@@ -207,7 +207,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(6);
             counters[6]++;
         }
-        saver.Toggle(GameMechanic.Unlockables);
+        saver.Set(GameMechanic.Unlockables, player.mechanicUnlockables);
     }
 
     public void TimeflowOptionPress()
@@ -226,7 +226,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(7);
             counters[7]++;
         }
-        saver.Toggle(GameMechanic.TimeFlow);
+        saver.Set(GameMechanic.TimeFlow, player.mechanicTimeflow);
     }
 
     public void InteractablesOptionPress()
@@ -245,7 +245,7 @@ public class DebugMode : MonoBehaviour
             ChangeXMark(8);
             counters[8]++;
         }
-        saver.Toggle(GameMechanic.Interactibles);
+        saver.Set(GameMechanic.Interactibles, player.mechanicInteractables);
     }
 
     public void ChangeXMark(int index)
@@ -313,7 +313,7 @@ public class DebugMode : MonoBehaviour
     bool AddKB(int mechanic)
     {
         bool result = false;
-        if((currentKB + mechanic) < maxKB)
+        if((currentKB + mechanic) <= maxKB)
         {
             currentKB += mechanic;
             result = true;
