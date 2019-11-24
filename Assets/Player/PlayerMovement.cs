@@ -107,11 +107,11 @@ public class PlayerMovement : MonoBehaviour
             }
             if (other.gameObject.tag == "Door")
             {
-                other.gameObject.GetComponent<Animator>().SetTrigger("DoorATrigger");
+                other.gameObject.GetComponent<Animator>().SetBool("IsDoorOpen", true);
             }
             if (other.gameObject.tag == "LockedDoor" && keys > 0)
             {
-                other.gameObject.GetComponent<Animator>().SetTrigger("DoorATrigger");
+                other.gameObject.GetComponent<Animator>().SetBool("IsDoorOpen", true);
                 other.gameObject.tag = "Door";
                 keys -= 1;
             }
@@ -138,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (other.gameObject.tag == "Door")
             {
-                other.gameObject.GetComponent<Animator>().SetTrigger("DoorClose");
+                other.gameObject.GetComponent<Animator>().SetBool("IsDoorOpen", false);
             }
         }
     }
