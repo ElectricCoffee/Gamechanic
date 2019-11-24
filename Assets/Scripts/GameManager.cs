@@ -21,8 +21,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         pm = player.GetComponent<PlayerMovement>();
-        textMesh = textMeshOB.GetComponent<TextMesh>();
+        textMesh = GameObject.FindGameObjectWithTag("Clock").GetComponent<TextMesh>();
         currentHour = startTime;
         
     }
