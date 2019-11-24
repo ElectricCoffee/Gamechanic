@@ -29,7 +29,7 @@ public class DebugMode : MonoBehaviour
     int optionIndex = 0;
     int[] counters;
     List<bool> isActive;
-    public int maxKB = 20;
+    public int maxKB = 30;
     public int currentKB = 0;
 
     private const string levelIndex = "LEVEL.sav";

@@ -12,7 +12,7 @@ public class VictoryTileTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        saver = GetComponent<SaveManagerController>();
+        saver = gameObject.GetComponent<SaveManagerController>();
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class VictoryTileTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.Contains("Player"))
+        if (other.gameObject.GetComponent<PlayerMovement>())
         {
             saver.Save();
             SceneManager.LoadScene(nextLevel);

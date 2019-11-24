@@ -31,7 +31,7 @@ public class SaveManagerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mechanics = new byte[9];
+        mechanics = new byte[16];
 
         if (!File.Exists(filepath))
         {
@@ -41,7 +41,7 @@ public class SaveManagerController : MonoBehaviour
 
         using (var fr = File.OpenRead(filepath))
         {
-            fr.Read(mechanics, 0, 9);
+            fr.Read(mechanics, 0, 16);
         }
     }
 
@@ -52,7 +52,7 @@ public class SaveManagerController : MonoBehaviour
     public void Reset()
     {
         Debug.Log("Resetting Save Data");
-        mechanics = new byte[9];
+        mechanics = new byte[16];
         mechanics[(uint)GameMechanic.Health] = 1;
         mechanics[(uint)GameMechanic.Movement] = 1;
         mechanics[(uint)GameMechanic.Rotation] = 1;
@@ -89,6 +89,10 @@ public class SaveManagerController : MonoBehaviour
     /// <returns></returns>
     public bool Get(GameMechanic gameMechanic)
     {
+        if (mechanics == null)
+        {
+            Start();
+        }
         return mechanics[(uint)gameMechanic] != 0;
     }
 
@@ -100,7 +104,7 @@ public class SaveManagerController : MonoBehaviour
         Debug.Log("Saving " + filepath);
         using (var fw = File.OpenWrite(filepath))
         {
-            fw.Write(mechanics, 0, 9);
+            fw.Write(mechanics, 0, 16);
         }
     }
 
